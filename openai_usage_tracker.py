@@ -94,9 +94,9 @@ def run_query(openai_org_id, openai_api_key, start_date, end_date):
                         concise_usage_dict[name_of_user][item["snapshot_id"]] = 0
                     # speciual case for fine-tuned model, assuming the base model is gpt-3.5-turbo 
                     if item["snapshot_id"].startswith("ft"):
-                        concise_usage_dict[name_of_user][item["snapshot_id"]] += round(0.0030 * item["n_context_tokens_total"] / 1000 + 0.0060 * item["n_generated_tokens_total"] / 1000, 2)
+                        concise_usage_dict[name_of_user][item["snapshot_id"]] += 0.0030 * item["n_context_tokens_total"] / 1000 + 0.0060 * item["n_generated_tokens_total"] / 1000, 2
                     elif item["snapshot_id"] in model_costs:
-                        concise_usage_dict[name_of_user][item["snapshot_id"]] += round(model_costs[item["snapshot_id"]]["context"] * item["n_context_tokens_total"] / 1000 + model_costs[item["snapshot_id"]]["generated"] * item["n_generated_tokens_total"] / 1000, 2)
+                        concise_usage_dict[name_of_user][item["snapshot_id"]] += model_costs[item["snapshot_id"]]["context"] * item["n_context_tokens_total"] / 1000 + model_costs[item["snapshot_id"]]["generated"] * item["n_generated_tokens_total"] / 1000, 2
                     else:
                         print(f"Unknown model {item['snapshot_id']}")
                     
