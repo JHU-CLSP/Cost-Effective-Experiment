@@ -139,7 +139,7 @@ if __name__ == '__main__':
         input("Estimated cost is above $100, are you sure you want to proceed? Press enter to continue.")
         # The script will continue after the user presses Enter.
     elif price > 1000:
-        raise ValueError("Estimated cost is above 1000$, are you trying to bankrupt Daniel? Please contact him first before proceeding!")
+        raise ValueError("Estimated cost is above $1000, are you trying to bankrupt Daniel? Please contact him first before proceeding!")
     leftover_message_list = messages_list[0: random_number] + messages_list[random_number + 1:]
     print("Running leftover messages...")
     response_list = apply_async(client, args.model, leftover_message_list, **kwargs)
