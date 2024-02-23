@@ -78,7 +78,8 @@ def apply_async(client: AsyncOpenAI, model: str, messages_list: list[list[dict]]
     if loop.is_closed():
         asyncio.set_event_loop(asyncio.new_event_loop())
         loop = asyncio.get_event_loop()
-    tasks = [loop.create_task(api_call_single(client, model, messages, pbar, **kwargs)) for messages in messages_list]
+    tasks = [loop.create_task(api_call_single(client, model, messages,\
+                            pbar, **kwargs)) for messages in messages_list]
     result = loop.run_until_complete(asyncio.gather(*tasks))
     loop.close()
     total_price = sum([r[1] for r in result])
