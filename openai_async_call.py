@@ -63,6 +63,9 @@ async def api_call_single(client: AsyncOpenAI, model: str, messages: list[dict],
             return response, price
         
         except Exception as e:  # Replace Exception with your client's specific rate limit exception
+            if isinstance(e, ValueError):
+                # re-raising the exception if it's a ValueError because that came from get_price
+                raise e
             if attempt < max_retries - 1:
                 wait = retry_delay * (2 ** attempt)  # Exponential backoff formula
                 print(f"Rate limit reached, retrying in {wait:.2f} seconds...")
@@ -124,7 +127,7 @@ if __name__ == '__main__':
 
     # get messages list to be used as input
     messages_list = get_messages_list(args.input_path)
-    # give your own keyword arguments here
+    # TODO: give your own keyword arguments here
     kwargs = {
         "temperature": 0,
     }
@@ -133,7 +136,7 @@ if __name__ == '__main__':
     print("Testing on message number " + str(random_number) + " to estimate cost...")
     random_response_list = apply_async(client, args.model, [messages_list[random_number]], **kwargs)
     price = random_response_list[0] * len(messages_list)
-    print("You are running: " + args.model + ". Estimated cost: " + str(round(price, 3)) + "$")
+    print("You are running: " + args.model + ". Estimated cost: $" + str(round(price, 3)))
     
     if price > 100 and price <= 1000:
         input("Estimated cost is above $100, are you sure you want to proceed? Press enter to continue.")
