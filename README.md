@@ -1,4 +1,4 @@
-# Cost-Effective-Experiment
+# Cost Efficient Experiment Design 
 
 To get the cost breakdown for each member in the organization during a time period (you need to be the owner in the organization to run it): 
 
@@ -11,3 +11,6 @@ To run fast async API call with cost estimation:
 ``python openai_async_call.py --input_path input.txt --output_path output.txt --model gpt-4-0125-preview``
 
 The input_path is optional, it contains the input prompt. The output will be written to output.txt
+
+
+Accompanying slides: https://docs.google.com/presentation/d/1kn1bJc_R2SWA8IW0FXoRkBue8SqHVojMscHk7IfbtD0/edit?usp=sharing
