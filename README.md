@@ -13,4 +13,4 @@ To run fast async API call with cost estimation:
 The input_path is optional, it contains the input prompt. The output will be written to output.txt
 
 
-Accompanying slides: https://docs.google.com/presentation/d/1kn1bJc_R2SWA8IW0FXoRkBue8SqHVojMscHk7IfbtD0/edit?usp=sharing
+Accompanying slides: https://docs.google.com/presentation/d/1VrLVoSEMMG2Ov06cj9dNeSDsktf5uA5b4C7P3qRp4Kg/edit?usp=sharing
