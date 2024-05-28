@@ -30,6 +30,8 @@ model_costs = {
     "whisper-1": {"context": 0.006 / 60, "generated": 0},
     "gpt-3.5-turbo-0125": {"context": 0.0005, "generated": 0.0015},
     "gpt-3.5-turbo-instruct": {"context": 0.0015, "generated": 0.002},
+    "gpt-4-turbo": {"context": 0.01, "generated": 0.03},
+    "gpt-4-turbo-2024-04-09": {"context": 0.01, "generated": 0.03},
 }
 
 ### BEGIN GENERAL FUNCTIONS ###
