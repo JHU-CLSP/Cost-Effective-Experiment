@@ -62,10 +62,8 @@ async def api_call_single(client: AsyncOpenAI, model: str, messages: list[dict],
             pbar.update(1) 
             return response, price
         
-        except Exception as e:  # Replace Exception with your client's specific rate limit exception
-            if isinstance(e, ValueError):
-                # re-raising the exception if it's a ValueError because that came from get_price
-                raise e
+        except openai.RateLimitError as e:
+            print(f"OpenAI API request exceeded rate limit: {e}")
             if attempt < max_retries - 1:
                 wait = retry_delay * (2 ** attempt)  # Exponential backoff formula
                 print(f"Rate limit reached, retrying in {wait:.2f} seconds...")
@@ -83,7 +81,8 @@ def apply_async(client: AsyncOpenAI, model: str, messages_list: list[list[dict]]
         loop = asyncio.get_event_loop()
     tasks = [loop.create_task(api_call_single(client, model, messages, pbar, **kwargs)) for messages in messages_list]
     result = loop.run_until_complete(asyncio.gather(*tasks))
-    loop.close()
+    # loop.close()
+    # the line above was causing weird issues...
     total_price = sum([r[1] for r in result])
     response_list = [r[0] for r in result]
     return total_price, response_list
